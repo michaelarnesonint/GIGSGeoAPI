@@ -1,16 +1,39 @@
+/*
+ * GIGS - Geospatial Integrity of Geoscience Software
+ * https://gigs.iogp.org/
+ *
+ * Copyright (C) 2022 International Association of Oil and Gas Producers.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
 package org.iogp.gigs;
 
 import org.iogp.gigs.internal.geoapi.Configuration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.opengis.referencing.crs.GeographicCRS;
 import org.opengis.referencing.datum.*;
 import org.opengis.util.FactoryException;
 import org.opengis.util.InternationalString;
-
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  * Verifies that the software allows correct definition of a user-defined vertical datum.
@@ -38,11 +61,13 @@ import static org.junit.jupiter.api.Assertions.*;
  * in order to specify their factories and run the tests in a JUnit framework,
  * implementers can define a subclass in their own test suite as in the example below:
  *
- * <blockquote><pre>public class MyTest extends Test3209 {
- *    public MyTest() {
- *        super(new MyDatumFactory(), new MyDatumAuthorityFactory());
- *    }
- *}</pre></blockquote>
+ * {@snippet lang="java" :
+ * public class MyTest extends Test3209 {
+ *     public MyTest() {
+ *         super(new MyDatumFactory());
+ *     }
+ * }
+ * }
  *
  * @author  Michael Arneson (INT)
  * @version 1.0
@@ -50,9 +75,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @DisplayName("User-defined vertical datum")
 public class Test3209 extends Series3000<VerticalDatum> {
-
     /**
-     * The vertical datum created by the factory, or {@code null} if not yet created or if datum creation failed.
+     * The vertical datum created by the factory, or {@code null} if not yet created or if the datum creation failed.
      *
      * @see #datumFactory
      */
@@ -215,5 +239,4 @@ public class Test3209 extends Series3000<VerticalDatum> {
         datumType = VerticalDatumType.GEOIDAL;
         verifyVerticalDatum();
     }
-
 }

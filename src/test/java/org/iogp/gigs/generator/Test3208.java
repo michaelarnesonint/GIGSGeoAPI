@@ -1,13 +1,33 @@
+/*
+ * GIGS - Geospatial Integrity of Geoscience Software
+ * https://gigs.iogp.org/
+ *
+ * Copyright (C) 2022 International Association of Oil and Gas Producers.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
 package org.iogp.gigs.generator;
-
-import org.iogp.gigs.internal.geoapi.Units;
 
 import javax.measure.Unit;
 import java.io.IOException;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Code generator for {@link org.iogp.gigs.Test3208}. This generator needs to be executed only if the GIGS data changed.
@@ -18,7 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @version 1.0
  * @since   1.0
  */
-public class Test3208 extends TestMethodGenerator {
+public final class Test3208 extends TestMethodGenerator {
     /**
      * Launcher.
      *
@@ -27,6 +47,12 @@ public class Test3208 extends TestMethodGenerator {
      */
     public static void main(String[] args) throws IOException {
         new Test3208().run();
+    }
+
+    /**
+     * Creates a new test methods generator.
+     */
+    private Test3208() {
     }
 
     /**
@@ -166,7 +192,7 @@ public class Test3208 extends TestMethodGenerator {
             //specify the source crs (either from gigs or epsg)
             if (crsCodes.contains(sourceCRSCode)) {
                 indent(2);
-                out.append("createSourceCRS(Test3205Geog2DCRS::GIGS_")
+                out.append("createSourceCRS(Test3205::GIGS_")
                         .append(sourceCRSCode).append(");\n");
             } else {
                 indent(2);
@@ -176,7 +202,7 @@ public class Test3208 extends TestMethodGenerator {
             //specify the target crs (either from gigs or epsg)
             if (crsCodes.contains(targetCRSCode)) {
                 indent(2);
-                out.append("createTargetCRS(Test3205Geog2DCRS::GIGS_")
+                out.append("createTargetCRS(Test3205::GIGS_")
                         .append(targetCRSCode).append(");\n");
             } else {
                 indent(2);
@@ -217,6 +243,14 @@ public class Test3208 extends TestMethodGenerator {
         flushAllMethods();
     }
 
+    /**
+     * Prints the parameter entry (name, value, unit) for javadoc function header.
+     *
+     * @param parameterName   the parameter name.
+     * @param parameterValue  the parameter value.
+     * @param parameterUnit   the unit.
+     * @param parameterValueAsDec the parameter value in decimal degrees if available.
+     */
     private void printJavadocParameterString(String parameterName, String parameterValue, String parameterUnit, String... parameterValueAsDec) {
         if (parameterName == null || parameterName.equals("NULL")) {
             return;
@@ -231,6 +265,14 @@ public class Test3208 extends TestMethodGenerator {
         printParameterTableRow(parameterName, parameterValue, parameterUnit);
     }
 
+    /**
+     * Prints the programmatic line that adds a parameter to a parameter group.
+     *
+     * @param parameterName   the parameter name.
+     * @param parameterValue  the parameter value.
+     * @param parameterUnit   the unit.
+     * @param parameterValueAsDec the parameter value in decimal degrees if available.
+     */
     private void printParameterString(String parameterName, String parameterValue, String parameterUnit, String... parameterValueAsDec) {
         if (parameterName == null || parameterName.equals("NULL")) {
             return;
@@ -255,6 +297,12 @@ public class Test3208 extends TestMethodGenerator {
         out.append(");\n");
     }
 
+    /**
+     * Prints the programmatic line that specifies the trajectory method. The transform method name
+     * specified in the GIGS testing file is converted to method name used for GeoAPI.
+     *
+     * @param gigsTransformationMethodName  the trajectory method as specified in the GIGS testing file.
+     */
     private void printTransformationMethodName(String gigsTransformationMethodName) {
         indent(2);out.append("methodName = ");
         switch(gigsTransformationMethodName) {
@@ -291,5 +339,4 @@ public class Test3208 extends TestMethodGenerator {
         }
         return dependencies;
     }
-
 }
